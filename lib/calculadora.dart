@@ -121,14 +121,16 @@ class _CalculadoraState extends State<Calculadora> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('imagenes/02.jpg'), fit: BoxFit.cover),
-      ),
-      child: ListView(
-        children: <Widget> [
-          Column(
+    return ListView(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(left: 300, top: 100, right: 300),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('imagenes/02.jpg'), fit: BoxFit.cover),
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+          ),
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Stack(
@@ -218,8 +220,8 @@ class _CalculadoraState extends State<Calculadora> {
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
