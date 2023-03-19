@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'bienvenida.dart';
-import 'calculadora.dart';
-import 'campo_texto.dart';
+import 'package:program_movil_uno/bienvenida.dart';
+import 'package:program_movil_uno/calculadora.dart';
+import 'package:program_movil_uno/campo_texto.dart';
 
 class BarraNavegacion extends StatefulWidget {
   const BarraNavegacion({Key? key}) : super(key: key);

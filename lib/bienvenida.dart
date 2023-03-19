@@ -12,7 +12,20 @@ class Bienvenida extends StatefulWidget {
 }
 
 class _BienvenidaState extends State<Bienvenida> {
-  String imagePath = '';
+  File? _image;
+
+  Future _pickImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (image == null) {
+      return;
+    }
+    File? img = File(image.path);
+
+    setState(() {
+      _image = img;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +38,7 @@ class _BienvenidaState extends State<Bienvenida> {
               'Hola ' +
                   (LocalStorage.prefs.getString('nombre') ?? 'extranjero') +
                   '\nveo que eres de ' +
-                  (LocalStorage.prefs.getString('pais')?? 'ninguna parte'),
+                  (LocalStorage.prefs.getString('pais') ?? 'ninguna parte'),
               style: const TextStyle(
                 fontFamily: 'Broken',
                 fontSize: 50,
@@ -46,23 +59,15 @@ class _BienvenidaState extends State<Bienvenida> {
             Container(
               child: ElevatedButton(
                 child: const Text('Cargar imagen'),
-                onPressed: () async {
-                  final ImagePicker _picker = ImagePicker();
-                  XFile _pickedFile =
-                      (await _picker.pickImage(source: ImageSource.gallery))!;
-                  imagePath = _pickedFile.path;
-                  setState(() {});
+                onPressed: () {
+                  _pickImage();
                 },
               ),
               margin: const EdgeInsets.only(top: 25),
             ),
-            (imagePath.isEmpty)
-                ? Container()
-                : Image.file(
-                    File(imagePath),
-                    width: 90,
-                    height: 90,
-                  ),
+            (_image == null)
+                ? const Text('Falta una imagen')
+                : Image.file((_image)!),
           ],
         ),
       ],

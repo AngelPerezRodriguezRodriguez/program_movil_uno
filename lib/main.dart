@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'barra_navegacion.dart';
-import 'local_storage.dart';
+import 'package:program_movil_uno/barra_navegacion.dart';
+import 'package:program_movil_uno/local_storage.dart';
 
 void main() async{
   await LocalStorage.configurePrefs();
