@@ -85,9 +85,3 @@ class _CampoTextoState extends State<CampoTexto> {
     );
   }
 }
-
-/*
-onSaved: (String? value) {
-              nombre = value!;
-            },
- */

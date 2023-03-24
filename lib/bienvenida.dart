@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:program_movil_uno/local_storage.dart';
 
+import 'image_picker.dart';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 
 class Bienvenida extends StatefulWidget {
   const Bienvenida({Key? key}) : super(key: key);
@@ -12,20 +13,8 @@ class Bienvenida extends StatefulWidget {
 }
 
 class _BienvenidaState extends State<Bienvenida> {
-  File? _image;
-
-  Future _pickImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (image == null) {
-      return;
-    }
-    File? img = File(image.path);
-
-    setState(() {
-      _image = img;
-    });
-  }
+  final _imagePicker = SelectorImagen();
+  File? _imagen;
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +48,16 @@ class _BienvenidaState extends State<Bienvenida> {
             Container(
               child: ElevatedButton(
                 child: const Text('Cargar imagen'),
-                onPressed: () {
-                  _pickImage();
+                onPressed: () async {
+                  _imagen = await _imagePicker.obtenerImagen();
+                  setState(() {});
                 },
               ),
               margin: const EdgeInsets.only(top: 25),
             ),
-            (_image == null)
+            (_imagen == null)
                 ? const Text('Falta una imagen')
-                : Image.file((_image)!),
+                : Image.file(_imagen!),
           ],
         ),
       ],
